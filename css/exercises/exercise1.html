@@ -6,7 +6,22 @@
   <meta name="viewport" content="width=device-width">
   <title>RWC CSS Exercise 1</title>
   <style>
-		/* Insert CSS here */
+	  div {
+		  float: left;
+	  }
+	  div div {
+		  height: 50px;
+		  width: 50px;
+	  }
+	  div div:first-child {
+		  background: red;
+	  }
+	  div div:nth-child(2) {
+		  background: blue;
+	  }
+	  div div:last-child {
+		  background: green;
+	  }
   </style>
 </head>
 <body>

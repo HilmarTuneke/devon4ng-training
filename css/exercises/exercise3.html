@@ -6,7 +6,61 @@
   <meta name="viewport" content="width=device-width">
   <title>RWC Flex Exercise 1</title>
   <style>
-		/* Insert CSS here */
+	  div {
+		  border-width: 1px;
+		  border-color: black;
+		  border-style: solid;
+		  text-align: center;
+		  margin: 5px;
+	  }
+	  .wrapper {
+		  display: flex;
+		  flex-wrap: wrap;
+	  }
+	  .header {
+		  order: 1;
+	  }
+	  .sidebar_left {
+		  order: 2;
+	  }
+	  .sidebar_left, .sidebar_right {
+		  flex-basis: 20%;
+		  background: lightgray;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+	  }
+	  .content {
+		  order: 3;
+		  display: flex;
+		  flex-wrap: wrap;
+		  flex-grow: 1;
+	  }
+	  .sidebar_right {
+		  order: 4;
+	  }
+	  .footer {
+		  order: 5;
+	  }
+	  .header, .footer {
+		  flex-basis: 100%;
+		  background: darkgray;
+	  }
+	  .content div:nth-child(3n+1) {
+		  background: red;
+		  flex-basis: 100%;
+	  }
+	  .content div
+	  {
+		  background: blue;
+		  flex-grow: 1;
+	  }
+
+	  @media only screen and (max-width: 600px) {
+		  .sidebar_left, .sidebar_right {
+			  flex-basis: 100%;
+		  }
+	  }
   </style>
 </head>
 <body>
