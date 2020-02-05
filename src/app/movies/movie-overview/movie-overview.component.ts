@@ -38,4 +38,8 @@ export class MovieOverviewComponent implements OnInit {
   isMovieSelected(movie: Movie) {
     return this.selectedMovie && movie.id === this.selectedMovie.id;
   }
+
+  create() {
+    this.selectedMovie = {description: '', directors: '', title: '', year: 0};
+  }
 }

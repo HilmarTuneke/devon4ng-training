@@ -14,11 +14,13 @@
         [attr.aria-details]="isMovieSelected(movie) ? 'movie-details' : null">
       <td>{{i+1}}</td>
       <td>{{movie.title}}</td>
-      <td>{{movie.director}}</td>
+      <td>{{movie.directors}}</td>
       <td><button (click)="selectMovie(movie)">Details anzeigen</button></td>
     </tr>
   </tbody>
 </table>
+
+<button (click)="create()">Anlegen</button>
 
 <app-movie-detail *ngIf="selectedMovie"
                   [headerLevel]="2"

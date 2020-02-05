@@ -1,54 +1,37 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Movie} from './movie';
 import {Observable} from 'rxjs';
-import {of} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
 
-  private movies: Movie[] = [];
+  moviesUrl = '/services/rest/movies';
 
-  constructor() {
-    this.movies.push({
-      description: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
-      director: 'Keine Ahnung',
-      id: 1,
-      title: 'Sehr toller Film',
-      year: 2015
-    });
-
-    this.movies.push({
-      description: `Bla bla blubb 2`,
-      director: 'Noch Jemand',
-      id: 2,
-      title: 'Sehr langweiliger Film',
-      year: 1973
-    });
+  constructor(private httpClient: HttpClient) {
   }
 
   findAll(): Observable<Movie[]> {
-    return of(this.movies.map(x => Object.assign({}, x))).pipe(delay(2000));
+    return this.httpClient.get<Movie[]>(this.moviesUrl);
   }
 
   save(movieToSave: Movie): Observable<Movie> {
-    const outdated: Movie = this.movies.find(m => m.id === movieToSave.id);
-    if (outdated) {
-      Object.assign(outdated, movieToSave);
-      return of(outdated).pipe(delay(2000));
+    movieToSave.id = this.numberfy(movieToSave.id);
+    movieToSave.year = this.numberfy(movieToSave.year);
+    return this.httpClient.post<Movie>(this.moviesUrl, movieToSave);
+  }
+
+  private numberfy(value: any): number {
+    if (value && typeof value !== 'number') {
+      return +value;
     } else {
-      this.movies.push(movieToSave);
-      return of(movieToSave).pipe(delay(2000));
+      return value;
     }
   }
 
   findOne(id: number): Observable<Movie> {
-    return of({...this.movies.find(m => m.id === id)}).pipe(delay(2000));
+    return this.httpClient.get<Movie>(this.moviesUrl + '/' + id);
   }
 }
