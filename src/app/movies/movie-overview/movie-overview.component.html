@@ -8,10 +8,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let movie of moviews; let i = index"
+    <tr *ngFor="let movie of movies$ | async; let i = index"
         (click)="selectMovie(movie)"
-        [class.selected]="movie===selectedMovie"
-        [attr.aria-details]="movie===selectedMovie ? 'movie-details' : null">
+        [class.selected]="isMovieSelected(movie)"
+        [attr.aria-details]="isMovieSelected(movie) ? 'movie-details' : null">
       <td>{{i+1}}</td>
       <td>{{movie.title}}</td>
       <td>{{movie.director}}</td>

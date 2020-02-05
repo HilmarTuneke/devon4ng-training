@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Movie} from '../movie';
+import {MovieService} from '../movie.service';
+import {CompletionObserver, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-movie-overview',
@@ -8,44 +10,32 @@ import {Movie} from '../movie';
 })
 export class MovieOverviewComponent implements OnInit {
 
-  moviews: Movie[] = [];
+  movies$: Observable<Movie[]>;
 
-  selectedMovie: Movie|null;
+  selectedMovie: Movie|null = null;
 
-  constructor() { }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.moviews.push({
-      description: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
-      director: 'Keine Ahnung',
-      id: 1,
-      title: 'Sehr toller Film',
-      year: 2015
-    });
+    this.reloadMovies();
+  }
 
-    this.moviews.push({
-      description: `Bla bla blubb 2`,
-      director: 'Noch Jemand',
-      id: 2,
-      title: 'Sehr langweiliger Film',
-      year: 1973
-    });
+  reloadMovies() {
+    this.movies$ = this.movieService.findAll();
   }
 
   selectMovie(movie: Movie): void {
     this.selectedMovie = movie;
   }
 
-  onMovieUpdated(updatedOrNewMovie: Movie): void {
-    const outdated: Movie = this.moviews.find(m => m.id === updatedOrNewMovie.id);
-    if (outdated) {
-      Object.assign(outdated, updatedOrNewMovie);
-    } else {
-      this.moviews.push(updatedOrNewMovie);
-    }
+  onMovieUpdated(movieToSave: Movie): void {
+    this.movieService.save(movieToSave).subscribe({
+      next: savedMovie => this.selectedMovie = savedMovie,
+      complete: () => this.reloadMovies()
+    });
+  }
+
+  isMovieSelected(movie: Movie) {
+    return this.selectedMovie && movie.id === this.selectedMovie.id;
   }
 }
