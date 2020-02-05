@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Movie} from '../movie';
 
 @Component({
@@ -9,14 +9,29 @@ import {Movie} from '../movie';
 export class MovieDetailComponent implements OnInit {
 
   @Input()
-  movie: Movie;
-
-  @Input()
   headerLevel: 2 | 3;
+
+  @Output()
+  movieUpdate: EventEmitter<Movie> = new EventEmitter<Movie>();
+
+  private myMovie: Movie;
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  get movie() {
+    return this.myMovie;
+  }
+
+  @Input()
+  set movie(movie: Movie) {
+    this.myMovie = {...movie};
+  }
+
+  apply(): void {
+    this.movieUpdate.emit(this.myMovie);
   }
 }

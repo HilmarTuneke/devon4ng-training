@@ -20,4 +20,9 @@
   </tbody>
 </table>
 
-<app-movie-detail *ngIf="selectedMovie" [headerLevel]="2" [movie]="selectedMovie" id="movie-details"></app-movie-detail>
+<app-movie-detail *ngIf="selectedMovie"
+                  [headerLevel]="2"
+                  [movie]="selectedMovie"
+                  (movieUpdate)="onMovieUpdated($event)"
+                  id="movie-details">
+</app-movie-detail>

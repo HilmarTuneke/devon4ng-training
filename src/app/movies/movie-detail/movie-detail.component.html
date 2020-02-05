@@ -1,6 +1,9 @@
 <section>
   <h2 class="title" *ngIf="headerLevel===2">{{movie.title}}</h2>
   <h3 class="title" *ngIf="headerLevel===3">{{movie.title}}</h3>
-  <p class="director">Regisseur: {{movie.director}}</p>
-  <p class="description">Beschreibung: {{movie.description}}</p>
+
+  <label class="director">Regisseur: <input type="text" [(ngModel)]="movie.director"/></label>
+  <label class="description">Beschreibung: <input type="text" [(ngModel)]="movie.description"/></label>
+
+  <button (click)="apply()">Speichern</button>
 </section>

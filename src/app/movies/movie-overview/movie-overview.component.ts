@@ -39,4 +39,13 @@ Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit ame
   selectMovie(movie: Movie): void {
     this.selectedMovie = movie;
   }
+
+  onMovieUpdated(updatedOrNewMovie: Movie): void {
+    const outdated: Movie = this.moviews.find(m => m.id === updatedOrNewMovie.id);
+    if (outdated) {
+      Object.assign(outdated, updatedOrNewMovie);
+    } else {
+      this.moviews.push(updatedOrNewMovie);
+    }
+  }
 }
