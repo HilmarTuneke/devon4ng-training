@@ -1,9 +1,19 @@
 :host {
   text-align: left;
-  border: 2px black solid;
   display: block;
+}
+
+section {
+  border: 2px black solid;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .title {
   background: lightgray;
+  flex-basis: 100%;
+}
+
+p {
+    margin: 6px;
 }

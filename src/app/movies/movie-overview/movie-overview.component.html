@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>Zeile</th>
+      <th>Titel</th>
+      <th>Regisseur</th>
+      <th>Aktionen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of moviews; let i = index"
+        (click)="selectMovie(movie)"
+        [class.selected]="movie===selectedMovie"
+        [attr.aria-details]="movie===selectedMovie ? 'movie-details' : null">
+      <td>{{i+1}}</td>
+      <td>{{movie.title}}</td>
+      <td>{{movie.director}}</td>
+      <td><button (click)="selectMovie(movie)">Details anzeigen</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<app-movie-detail *ngIf="selectedMovie" [headerLevel]="2" [movie]="selectedMovie" id="movie-details"></app-movie-detail>

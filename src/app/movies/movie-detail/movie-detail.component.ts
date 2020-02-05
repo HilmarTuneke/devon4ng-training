@@ -8,24 +8,15 @@ import {Movie} from '../movie';
 })
 export class MovieDetailComponent implements OnInit {
 
-  currentMovie: Movie;
+  @Input()
+  movie: Movie;
 
   @Input()
-  headerLevel: 2|3;
+  headerLevel: 2 | 3;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.currentMovie = {
-      description: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
-      director: 'keine Ahnung',
-      id: 28,
-      title: 'Sehr Toller Film',
-      year: 2015
-    };
   }
 }
