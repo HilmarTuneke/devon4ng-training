@@ -1,5 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>Filme</h1>
-  <app-movie-overview></app-movie-overview>
-</div>
+<h1>Filme</h1>
+
+<nav>
+  <ul>
+    <li><a routerLink="/movies" routerLinkActive="active">Filmliste</a></li>
+    <li><a routerLink="/about" routerLinkActive="active">Impressum</a></li>
+    <li><a routerLink="/register" routerLinkActive="active">Registrieren</a></li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>

@@ -9,18 +9,17 @@
   </thead>
   <tbody>
     <tr *ngFor="let movie of movies$ | async; let i = index"
-        (click)="selectMovie(movie)"
         [class.selected]="isMovieSelected(movie)"
         [attr.aria-details]="isMovieSelected(movie) ? 'movie-details' : null">
       <td>{{i+1}}</td>
       <td>{{movie.title}}</td>
       <td>{{movie.directors}}</td>
-      <td><button (click)="selectMovie(movie)">Details anzeigen</button></td>
+      <td><a routerLink="/movies/{{movie.id}}">Details anzeigen</a></td>
     </tr>
   </tbody>
 </table>
 
-<button (click)="create()">Anlegen</button>
+<a routerLink="/movies/new">Anlegen</a>
 
 <app-movie-detail *ngIf="selectedMovie"
                   [headerLevel]="2"
