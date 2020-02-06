@@ -4,16 +4,23 @@ import { Speaker } from './speaker';
 
 @Injectable()
 export class HelloService {
-  private speech: string[] = [];
+  private lines: string[] = [];
 
   constructor(private speaker: Speaker) { }
 
-  say(line: string): void {
+  sayOnSpeaker(line: string): void {
     this.speaker.speak(line);
-    this.speech.push(line);
   }
 
   getSpeech(): string {
-    return this.speech.join('\n');
+    return this.lines.join('\n');
+  }
+
+  writeToBook(line: string): void {
+    this.lines.push(line);
+  }
+
+  getBook() {
+    return this.lines.join('\n');
   }
 }
