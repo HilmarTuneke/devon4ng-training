@@ -13,8 +13,8 @@ function* idSequence(initial) {
 
 const movieIdGen = idSequence(max(map(movieData, 'id')) + 1);
 
-const isMovie = (movie) => !!movie.title && isString(movie.title) 
-&& !!movie.directors && isString(movie.directors) 
+const isMovie = (movie) => !!movie.title && isString(movie.title)
+&& !!movie.directors && isString(movie.directors)
 && !!movie.description && isString(movie.description)
 && !!movie.year && isNumber(movie.year) ;
 const hasMovie = (req, res, next) => {
@@ -30,8 +30,8 @@ const byId = (id) => (movie) => movie.id === +id;
  // ----------  EXPRESS ----------
 
 const app = express();
-app.use(bodyParser.json()); 
-app.use(morgan('combined')); 
+app.use(bodyParser.json());
+app.use(morgan('combined'));
 
 app.get('/services/rest/movies', (req, res) => {
   res.json(movieData);
@@ -74,10 +74,10 @@ app.get('/services/rest/search', (req, res) => {
   res.json(matchMoviesForQuery(req.query));
 });
 
-const delayedRequest = false;
+let delayedRequest = false;
 app.get('/services/rest/search/delay', (req, res) => {
   const matches = matchMoviesForQuery(req.query);
-  
+
   if (delayedRequest) {
     console.log(`Serving delayed for: ${text}`);
     setTimeout(() => res.json(matches), 2000)

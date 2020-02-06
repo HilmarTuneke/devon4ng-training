@@ -16,8 +16,7 @@ describe('MovieService', () => {
     expect(movies$).toBeTruthy();
   });
 
-  it('should return movies',
-    (done: DoneFn) => {
+  it('should return movies', (done: DoneFn) => {
     const service: MovieService = TestBed.get(MovieService);
     const movies$ = service.findAll();
     movies$.subscribe(movies => {
@@ -26,8 +25,7 @@ describe('MovieService', () => {
     });
   });
 
-  it('should save a movie',
-    (done: DoneFn) => {
+  it('should save a movie', (done: DoneFn) => {
       // TODO
       done();
     });
