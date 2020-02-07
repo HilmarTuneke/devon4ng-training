@@ -1,1 +1,31 @@
-<p>register works!</p>
+<form [formGroup]="registrationForm" novalidate (ngSubmit)="register()">
+
+  <label>Vorname <input type="text" formControlName="firstName"></label>
+  <ul *ngIf="registrationForm.get('firstName').touched && !registrationForm.get('firstName').valid">
+    <li *ngIf="registrationForm.get('firstName').getError('required')">Das Feld muss ausgefüllt werden.</li>
+    <li *ngIf="registrationForm.get('firstName').getError('minlength')">Min 4 Zeichen.</li>
+  </ul>
+
+  <label>Nachname <input type="text" formControlName="lastName"></label>
+  <ul *ngIf="registrationForm.get('lastName').touched && !registrationForm.get('lastName').valid">
+    <li *ngIf="registrationForm.get('lastName').getError('required')">Das Feld muss ausgefüllt werden.</li>
+    <li *ngIf="registrationForm.get('lastName').getError('minlength')">Min 4 Zeichen.</li>
+  </ul>
+
+  <label>E-Mail-Adresse<input type="text" formControlName="email"></label>
+  <ul *ngIf="registrationForm.get('email').touched && !registrationForm.get('email').valid">
+    <li *ngIf="registrationForm.get('email').getError('email')">Bitte eine E-Mail-Adresse.</li>
+  </ul>
+
+  <fieldset formGroupName="passwords">
+    <label>Passwort <input type="password" formControlName="password"></label>
+    <ul *ngIf="registrationForm.get('passwords').get('password').touched && !registrationForm.get('passwords').get('password').valid">
+      <li *ngIf="registrationForm.get('passwords').get('password').getError('required')">Das Feld muss ausgefüllt werden.</li>
+    </ul>
+
+    <label>Wiederholung <input type="password" formControlName="passwordRepetition"></label>
+  </fieldset>
+
+  <button type="submit">Registrieren</button>
+
+</form>
