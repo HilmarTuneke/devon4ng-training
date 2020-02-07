@@ -36,7 +36,7 @@ import { Speaker } from './speaker';
   </div>
   <app-speaker></app-speaker>
   <app-book></app-book>
-<div>`
+</div>`
 })
 export class HelloComponent {
   @ViewChild('helloInput') vc: any;
