@@ -14,7 +14,7 @@
       <td>{{i+1}}</td>
       <td>{{movie.title}}</td>
       <td>{{movie.directors}}</td>
-      <td><a routerLink="/movies/{{movie.id}}">Details anzeigen</a></td>
+      <td><a [routerLink]="['/movies', movie.id]">Details anzeigen</a></td>
     </tr>
   </tbody>
 </table>
